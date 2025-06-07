@@ -26,11 +26,11 @@ const Login = () => {
     const pwMonitor = useCallback(e => dispatch({command : 'pw', pw : e.target.value}), [data.pw])
     return (
         <div className="flex h-screen flex-wrap content-center justify-center">
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend text-xl">ChatBridge</legend>
+            <fieldset className="fieldset bg-white border-base-300 rounded-box w-xs border p-4">
+                <legend className="fieldset-legend text-4xl text-center">ChatBridge</legend>
 
                 <label className="label">ID</label>
-                <input type="email" className="input" placeholder="ID" onChange={idMonitor}/>
+                <input type="text" className="input" placeholder="ID" onChange={idMonitor}/>
 
                 <label className="label">PW</label>
                 <input type="password" className="input" placeholder="PW" onChange={pwMonitor}/>
