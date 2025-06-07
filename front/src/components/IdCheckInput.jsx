@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useCallback, useRef, useState } from 'react';
 
 
-const IdCheckInput = () => {
+const IdCheckInput = ({ update }) => {
 
     const id = useRef('');
     const [idError, setError] = useState(false);
@@ -19,6 +19,7 @@ const IdCheckInput = () => {
         setError(e => false);
         setSuccess(e => true);
         setMsg(e => "사용가능한 아이디입니다.")
+        update({ id : id.current });
 
         // await axios.get("/idCheck")
         // .then(res => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 
 const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{2,20}$/;
 const reducer = (state, action) => {
@@ -7,7 +7,6 @@ const reducer = (state, action) => {
     switch (action.type) {
         case "pwHandle":
             copy.pw = action.value
-            console.log(copy.ck)
             if (copy.ck.length !== 0) {
                 copy.ck = '';
                 copy.ckError = false;
@@ -33,7 +32,6 @@ const reducer = (state, action) => {
                 copy.ckSuccess = false;
                 copy.ckMsg = '비밀번호가 일치하지 않습니다.'
             }else {
-                
                 copy.ckError = false;
                 copy.ckSuccess = true;
                 copy.ckMsg = '비밀번호가 일치합니다.'
@@ -43,7 +41,7 @@ const reducer = (state, action) => {
             return state;
     }
 };
-const CreateUpdatePw = () => {
+const CreateUpdatePw = ({ update }) => {
     const [pw, dispatch] = useReducer(reducer, {
         pw: '', ck: '',
         pwError: false, pwSuccess : false, ckError: false, ckSuccess : false, // 에러 컨트롤
@@ -51,7 +49,11 @@ const CreateUpdatePw = () => {
     });
     const pwHandle = useCallback((e) => dispatch({ type: 'pwHandle', value: e.target.value }), [dispatch]);
     const ckHandle = useCallback((e) => dispatch({ type: 'ckHandle', value: e.target.value }), [dispatch]);
-    
+    useEffect(() => {
+        if (pw.ckSuccess) {
+            update({ pw : pw.pw})
+        }
+    }, [pw.ckSuccess])
     return (
         <div className="flex w-full flex-col space-y-1">
             <label className="label">Pw</label>
