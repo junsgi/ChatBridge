@@ -26,11 +26,13 @@ const IdCheckInput = ({ update }) => {
         //     setError(e => false);
         //     setSuccess(e => true);
         //     setMsg(e => "사용가능한 아이디입니다.")
+        //     update({ id : id.current });
         // })
         // .catch(e => {
         //     setError(e => true);
         //     setSuccess(e => false);
         //     setMsg(it => e.name);
+        //     update({ id : '' });
         // })
     }, [setError, setSuccess, setMsg]);
     return (

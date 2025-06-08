@@ -9,6 +9,7 @@ const Signup = () => {
     const update = useCallback((update) => {
         setData(prev => {return {...prev, ...update}})
     }, [setData]);
+    const birth = useCallback(e => update({birth : e.target.value}), [update]);
     const today = useMemo(() => {
         const now = new Date();
         const year = now.getFullYear();
@@ -26,7 +27,7 @@ const Signup = () => {
                 <EmailForm update={update}/>
 
                 <label className="label">Brith</label>
-                <input type="date" className="input" max={today} />
+                <input type="date" className={`input ${data.birth.length > 0 ? 'input-success' : ''}`} max={today} onChange = {birth} />
                 <button className="btn btn-neutral mt-4" onClick = {() => console.log(data)}>sign up</button>
 
                 <div className="mt-5 flex w-full">

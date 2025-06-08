@@ -52,6 +52,8 @@ const CreateUpdatePw = ({ update }) => {
     useEffect(() => {
         if (pw.ckSuccess) {
             update({ pw : pw.pw})
+        }else {
+            update({ pw : ''})
         }
     }, [pw.ckSuccess])
     return (
