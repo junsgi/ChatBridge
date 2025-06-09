@@ -12,59 +12,44 @@ const EmailForm = ({ update }) => {
     const [codeSuccess, setCodeSuccess] = useState(false);
     const [codeMsg, setCodeMsg] = useState('');
 
-    const TIME = 3
+    const TIME = 3;
     const [count, setCount] = useState(0);
     let interval = undefined;
 
-    const codeHandle = useCallback((e) => {
-        setCode((prev) => e.target.value)
-        console.log(count);
-        if (e.target.value === key.current && count > 0){
-            setCodeError(false);
-            setCodeSuccess(true);
-            setCodeMsg('인증이 완료되었습니다.');
-            if (interval) clearInterval(interval);
-            update({ email : email.current.value });
-        }else if (count <= 0){
-            setCodeError(true);
-            setCodeMsg('만료되었습니다.');
-        }else{
-            setCodeError(true);
-            setCodeMsg('인증번호가 일치하지 않습니다.');
-        }
-    }, [setCode, setCodeError, setCodeSuccess, setCodeMsg, update, count]);
+    const codeHandle = useCallback((e) => setCode((prev) => e.target.value),[setCode]);
 
     const countDown = useCallback(() => {
         if (interval) clearInterval(interval);
-        setCount(TIME)
+        setCount(TIME);
         interval = setInterval(() => {
-            setCount(prev => {
+            setCount((prev) => {
                 if (prev === 0) {
                     clearInterval(interval);
                     return 0;
-                }else {
+                } else {
                     return prev - 1;
                 }
             });
-        }, 1000)
+        }, 1000);
     }, [setCount]);
 
+    // 코드전송
     const getCode = useCallback(async () => {
         if (!email.current.checkValidity()) {
             email.current.reportValidity();
             setEmailError(() => true);
             setEmailSuccess(() => false);
-            setEmailMsg("")
+            setEmailMsg('');
             setCount(0);
             setCode('');
             setCodeSuccess(false);
-            if (interval) clearInterval(interval)
+            if (interval) clearInterval(interval);
             return;
         }
-        key.current = "12345";
+        key.current = '12345';
         setEmailSuccess(true);
         setEmailError(false);
-        setEmailMsg("이메일로 전송된 인증 코드를 입력해주세요.");
+        setEmailMsg('이메일로 전송된 인증 코드를 입력해주세요.');
         countDown();
 
         // const response = await axios
@@ -87,28 +72,61 @@ const EmailForm = ({ update }) => {
         //     setEmailMsg('Error ' + errorStatus + ' : ' + errorMsg);
         // }
     }, [setEmailError, setEmailSuccess, setEmailMsg, setCode, setCodeError, setCodeSuccess, setCodeMsg, setCount, codeSuccess]);
+    // 코드전송
+
+    
+    // 인증버튼
+    const auth = useCallback(() => {
+        if (!(eSuccess && !eError)) return;
+        if (code === key.current && count > 0) {
+            setCodeError(false);
+            setCodeSuccess(true);
+            setCodeMsg('인증이 완료되었습니다.');
+            if (interval) clearInterval(interval);
+            update({ email: email.current.value });
+        } else if (count <= 0) {
+            setCodeError(true);
+            setCodeMsg('만료되었습니다.');
+            update({ email: '' });
+        } else {
+            setCodeError(true);
+            setCodeMsg('인증번호가 일치하지 않습니다.');
+            update({ email: '' });
+        }
+    },[setCode, setCodeError, setCodeSuccess, setCodeMsg, update, code, count]);
     return (
         <div className="flex w-full flex-col space-y-1">
             <label className="label">Email</label>
             <div className="join w-full">
-                <input type="email" ref={email} disabled={codeSuccess} required placeholder="Email" className={`input join-item w-full ${eError ? 'input-error' : (eSuccess ? 'input-success' : '')}`} />
-                <button type="button" onClick={getCode} className="btn btn-neutral join-item">
-                    코드전송
-                </button>
-            </div>
-            {(eError || eSuccess) && <p className={eError ? "text-error" : "text-success"}>{eMsg}</p>}
-
-            <label className="label">Code</label>
-            <div className="w-full flex flex-wrap">
-                <input type="text" placeholder="Code" disabled={!eSuccess || codeSuccess} value = {code} onChange={codeHandle} className={`input join-item w-full ${codeError ? 'input-error' : (codeSuccess ? 'input-success' : '')}`} />
+                <input type="email" ref={email} disabled={codeSuccess} required placeholder="Email" className={`input join-item w-full ${eError ? 'input-error' : eSuccess ? 'input-success' : ''}`} />
                 {
                     !codeSuccess && 
-                    <span className="countdown font-mono label text-base mt-1">
-                        <span style={{"--value": parseInt(count / 60)}} aria-live="polite"></span>:
-                        <span style={{"--value":count % 60}} aria-live="polite"></span>
-                    </span>
+                    <button type="button" onClick={getCode} className="btn btn-neutral join-item">
+                        코드전송
+                    </button>
                 }
-                {(codeError || codeSuccess) && <p className={`mt-1 ml-2 ${codeError ? "text-error" : "text-success"}`}>{codeMsg}</p>}
+            </div>
+            {(eError || eSuccess) && <p className={eError ? 'text-error' : 'text-success'}>{eMsg}</p>}
+
+            <label className="label">Code</label>
+            <div className="join w-full">
+                <input type="text" placeholder="Code" disabled={!eSuccess || codeSuccess} value={code} onChange={codeHandle} className={`input join-item w-full ${codeError ? 'input-error' : codeSuccess ? 'input-success' : ''}`} />
+                {
+                    !codeSuccess && 
+                    <button type="button" onClick={auth} className="btn btn-neutral join-item w-[89.6px]">
+                        인증
+                    </button>
+                }
+            </div>
+
+            {/* countdown, message */}
+            <div className="mt-1 flex items-center gap-2">
+                {!codeSuccess && (
+                    <span className="countdown font-mono text-base">
+                        <span style={{ '--value': parseInt(count / 60) }} aria-live="polite"></span>:<span style={{ '--value': count % 60 }} aria-live="polite"></span>
+                    </span>
+                )}
+                {(codeError || codeSuccess) && <span className={`${codeError ? 'text-error' : 'text-success'}`}>{codeMsg}</span>}
             </div>
         </div>
     );

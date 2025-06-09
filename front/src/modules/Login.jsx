@@ -25,7 +25,7 @@ const Login = () => {
     const idMonitor = useCallback(e => dispatch({command : 'id', id : e.target.value}), [data.id])
     const pwMonitor = useCallback(e => dispatch({command : 'pw', pw : e.target.value}), [data.pw])
     return (
-        <div className="flex h-screen flex-wrap content-center justify-center">
+        <div className="flex min-h-screen flex-wrap content-center justify-center overflow-auto">
             <fieldset className="fieldset bg-white border-base-300 rounded-box w-xs border p-4">
                 <legend className="fieldset-legend text-4xl text-center">ChatBridge</legend>
 

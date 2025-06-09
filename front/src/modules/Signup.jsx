@@ -18,7 +18,7 @@ const Signup = () => {
         return `${year}-${month}-${day}`;
     }, []);
     return (
-        <div className="flex h-screen flex-wrap content-center justify-center">
+        <div className="flex min-h-screen flex-wrap content-center justify-center overflow-auto">
             <fieldset className="fieldset border-base-300 rounded-box w-xs border bg-white p-4">
                 <legend className="fieldset-legend text-center text-4xl">ChatBridge</legend>
 

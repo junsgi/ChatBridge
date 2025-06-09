@@ -58,7 +58,7 @@ const CreateUpdatePw = ({ update }) => {
     }, [pw.ckSuccess])
     return (
         <div className="flex w-full flex-col space-y-1">
-            <label className="label">Pw</label>
+            <label className="label">PW</label>
             <input type="password" placeholder="Password" onChange={pwHandle} className={`input ${pw.pwError ? 'input-error' : (pw.pwSuccess ? 'input-success' : '')}`} />
             {(pw.pwError || pw.pwSuccess) && <p className={pw.pwError ? "text-error" : "text-success"}>{pw.pwMsg}</p>}
 
