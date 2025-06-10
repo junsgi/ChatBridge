@@ -1,5 +1,5 @@
-import FindID from '../components/FindID';
-import FindPW from '../components/FindPW';
+import FindID from '../components/user/FindID';
+import FindPW from '../components/user/FindPW';
 
 const FindIDPW = () => {
     

@@ -18,9 +18,9 @@ const IdCheckInput = ({ update }) => {
         }
         setError(e => false);
         setSuccess(e => true);
-        setMsg(e => "사용가능한 아이디입니다.")
+        setMsg(e => "server message")
         update({ id : id.current });
-
+        // 서버에서 메시지를 보내줘야함
         // await axios.get("/idCheck")
         // .then(res => {
         //     setError(e => false);
@@ -41,7 +41,7 @@ const IdCheckInput = ({ update }) => {
 
             <div className="join w-full">
                 <input type="text" onChange={idHandle} minLength={2} maxLength = {20} className={`input join-item w-full ${idError ? 'input-error' : (idSuccess ? 'input-success' : '')}`} placeholder="ID" />
-                <button className="btn btn-neutral join-item" onClick = {onclick}>중복확인</button>
+                <button className="btn btn-neutral join-item w-[89.6px]" onClick = {onclick}>확인</button>
             </div>
 
             {(idError || idSuccess) && <p className={idError ? `text-error` : 'text-success'}>{idMsg}</p>}

@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import CreateUpdatePw from '../components/CreateUpdatePw';
-import IdCheckInput from '../components/IdCheckInput';
-import EmailForm from '../components/EmailForm';
+import CreateUpdatePw from '../components/user/CreateUpdatePw';
+import IdCheckInput from '../components/user/IdCheckInput';
+import EmailForm from '../components/user/EmailForm';
 
 const Signup = () => {
     const [data, setData] = useState({ id : '', pw : '', email : '', birth : ''});
