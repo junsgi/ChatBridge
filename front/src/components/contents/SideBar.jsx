@@ -7,8 +7,7 @@ const SideBar = () => {
         navi("/");
     }, [])
     return (
-        <>
-        <aside className="bg-base-200 flex w-64 flex-col p-4 shadow-md">
+        <aside className="bg-base-200 flex w-64  flex-col p-4 shadow-md">
 
             <h1 className="mb-4 text-2xl font-bold">ChatBridge</h1>
 
@@ -33,7 +32,6 @@ const SideBar = () => {
                 <button className="btn btn-outline btn-error w-full" onClick = {logout}>로그아웃</button>
             </div>
         </aside>
-        </>
     );
 };
 export default SideBar;
