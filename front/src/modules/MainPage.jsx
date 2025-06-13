@@ -49,17 +49,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-
-/**
-
-랭킹 알고리즘인데요
-
-모두가 1등이라고 정해요
-그럼
-avg =  [75, 40, 95, 100, 20]
-rank = [1, 1, 1, 1, 1]
-
-2중 for문 돌면서
-i!=j && i보다 큰게 있다면 rank[i]++;
-*/
