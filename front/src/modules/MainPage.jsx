@@ -28,8 +28,8 @@ const MainPage = () => {
                             {/* 채팅 레이아웃 */}
                             <div className="card grid w-[80%] h-full">
                                 <div className="flex flex-col w-full">
-                                    <div className="card border grid h-[85%] place-items-center">채팅</div>
-                                    <div className="card border grid h-[15%] place-items-center">입력</div>
+                                    <div className="card border grid h-[85%] place-items-center">채팅쪽</div>
+                                    <div className="card border grid h-[15%] place-items-center">입력쪽</div>
                                 </div>
 
                             </div>
