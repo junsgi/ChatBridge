@@ -12,7 +12,7 @@ const EmailForm = ({ update }) => {
     const [codeSuccess, setCodeSuccess] = useState(false);
     const [codeMsg, setCodeMsg] = useState('');
 
-    const TIME = 3;
+    const TIME = 119;
     const [count, setCount] = useState(0);
     let interval = undefined;
 
