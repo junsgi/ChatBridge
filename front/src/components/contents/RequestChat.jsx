@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RequestChat = () => {
+const RequestChat = ({create_at}) => {
     return (
         <div className="chat chat-end">
             <div className="chat-image avatar">
@@ -10,7 +10,7 @@ const RequestChat = () => {
             </div>
             <div className="chat-header">
                 User
-                <time className="text-xs opacity-50">12:46</time>
+                <time className="text-xs opacity-50">{create_at}</time>
             </div>
             <div className="chat-bubble">Request!</div>
             <div className="chat-footer opacity-50">Seen at 12:46</div>
